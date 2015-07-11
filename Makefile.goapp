@@ -1,0 +1,23 @@
+#
+# This is a Makefile include for module that uses the standard goapp tooling
+#
+
+#environment variables
+
+#Set the GOPATH. ROOT is set to the directory this file is in.
+GOPATH=$(ROOT)
+export GOPATH
+
+
+#Install all the dependencies that are shared across modules
+deps:
+	goapp get github.com/nu7hatch/gouuid
+
+#Serve via a local instance
+serve:
+	goapp serve app.yaml
+
+#Deploy this module to appengine
+deploy:
+	@read -p "What is your Project ID?: " projectID; \
+	goapp deploy -application $$projectID app.yaml

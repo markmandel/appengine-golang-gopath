@@ -1,0 +1,18 @@
+#
+# This is a Makefile include for modules that uses the gb tooling
+#
+
+#We don't need the gopath include here, since GB manages that.
+
+#Get dependencies, using gb-vendor plugin.
+deps:
+	gb vendor fetch github.com/nu7hatch/gouuid
+
+#Serve using the gb-gae plugin.
+serve:
+	gb gae serve app.yaml
+
+#Deploy this module using the gb-gae plugin.
+deploy:
+	@read -p "What is your Project ID?: " projectID; \
+	gb gae deploy -application $$projectID app.yaml
